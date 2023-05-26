@@ -36,16 +36,16 @@ namespace Player {
 
 			float distanceLeft = Math.Abs(moveVector.x);
 			Vector2 moveDirection = moveVector.x >= 0 ? Vector2.right : Vector2.left;
+			bool overrideIsGrounded = false;
 			bool stuck = false;
 			for (int iteration = 0; iteration < maxStepIterations && distanceLeft > 0; iteration++) {
 				float previousDistanceLeft = distanceLeft;
 
 				TrySlopeDescend(ref resultMove, moveDirection, ref distanceLeft);
 				TryMoveStraight(ref resultMove, moveDirection, ref distanceLeft);
-				TrySlopeAscend(ref resultMove, moveDirection, ref distanceLeft);
-				// TODO steps stepping here!
+				TrySlopeAscend(ref resultMove, moveDirection, ref distanceLeft, ref overrideIsGrounded);
 
-				if (Math.Abs(previousDistanceLeft - distanceLeft) < 1e-7f) {
+				if (Math.Abs(previousDistanceLeft - distanceLeft) < 1e-5f) {
 					// cannot move any further (e.g. walking into a wall)
 					stuck = true;
 					break;
@@ -57,7 +57,7 @@ namespace Player {
 			}
 
 			// TODO this is JANK
-			_moveResult.isGrounded = raycastController.CastBox(resultMove, Vector2.down, 0.05f);
+			_moveResult.isGrounded = overrideIsGrounded || raycastController.CastBox(resultMove, Vector2.down, 0.05f);
 			transform.Translate(resultMove);
 			return _moveResult;
 		}
@@ -111,7 +111,7 @@ namespace Player {
 			positionOffset += maxMove;
 		}
 
-		private void TrySlopeAscend(ref Vector2 positionOffset, Vector2 moveDirection, ref float distanceLeft) {
+		private void TrySlopeAscend(ref Vector2 positionOffset, Vector2 moveDirection, ref float distanceLeft, ref bool overrideIsGrounded) {
 			if (distanceLeft <= 0) {
 				return;
 			}
@@ -125,19 +125,56 @@ namespace Player {
 			}
 
 			Vector2 slopeNormal = slopeHit.normal;
-			// ignore slope if it leads downhill
-			if (slopeNormal.x >= 0 == moveDirection.x >= 0) {
-				Debug.LogWarning("How did you even hit a downwards slope while moving horizontally?!");
-				return;
-			}
-
 			float slopeAngle = Vector2.Angle(slopeNormal, Vector2.up);
 			if (slopeAngle > 0 && slopeAngle <= maxSlopeAngle) {
+				// can ascend normally
 				Vector2 slopeUpDirection = Vector2.Perpendicular(slopeNormal) * (moveDirection.x >= 0 ? -1 : 1);
 				Vector2 maxMove = raycastController.GetMaxMove(positionOffset, slopeUpDirection, distanceLeft);
 				distanceLeft -= maxMove.magnitude;
 				positionOffset += maxMove;
+			} else {
+				TryStepAscend(ref positionOffset, moveDirection, ref distanceLeft, ref overrideIsGrounded);
 			}
+		}
+
+		private void TryStepAscend(ref Vector2 positionOffset, Vector2 moveDirection, ref float distanceLeft, ref bool overrideIsGrounded) {
+			Vector2 stepCastOffset = new(
+					(moveDirection.x >= 0 ? 1 : -1) * (RaycastController.skinWidth * 2),
+					stepHeight
+			);
+			RaycastHit2D stepHit = moveDirection.x >= 0
+					? raycastController.CastRayBottomRight(positionOffset + stepCastOffset, Vector2.down, stepHeight)
+					: raycastController.CastRayBottomLeft(positionOffset + stepCastOffset, Vector2.down, stepHeight);
+
+			if (!stepHit) {
+				return;
+			}
+
+			float stepHitHeight = stepHeight - stepHit.distance;
+			if (stepHitHeight <= 0) {
+				return;
+			}
+			
+			float requiredHeadHeight = raycastController.GetControllerHeight() - (stepHeight - stepHitHeight);
+			RaycastHit2D stepUpHit = moveDirection.x >= 0
+					? raycastController.CastRayBottomRight(positionOffset + stepCastOffset, Vector2.up, requiredHeadHeight)
+					: raycastController.CastRayBottomLeft(positionOffset + stepCastOffset, Vector2.up, requiredHeadHeight);
+
+			if (stepUpHit) {
+				// not enough space for player to fit
+				return;
+			}
+
+			float ascendHeight = Math.Min(stepHitHeight, distanceLeft) + 0.01f;
+			RaycastHit2D stepAscendHit = raycastController.CastBox(positionOffset, Vector2.up, ascendHeight);
+			if (stepAscendHit) {
+				// cannot ascend step because ceiling is blocking us
+				return;
+			}
+
+			distanceLeft -= ascendHeight;
+			positionOffset.y += ascendHeight;
+			overrideIsGrounded = true;
 		}
 
 		public struct MoveResult {

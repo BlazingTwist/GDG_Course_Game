@@ -6,7 +6,7 @@ public class RaycastController : MonoBehaviour {
 	/// <summary>
 	/// The inset into the bounding box used when casting rays
 	/// </summary>
-	private const float skinWidth = 0.01f;
+	public const float skinWidth = 0.01f;
 
 	/// <summary>
 	/// If enabled, draws traced rays for debugging purposes.
@@ -38,6 +38,10 @@ public class RaycastController : MonoBehaviour {
 
 		raycastOrigin.bottomRight.x = bounds.max.x;
 		raycastOrigin.bottomRight.y = bounds.min.y;
+	}
+
+	public float GetControllerHeight() {
+		return collider.size.y;
 	}
 
 	/// <summary>
@@ -107,7 +111,7 @@ public class RaycastController : MonoBehaviour {
 		);
 	}
 
-	public struct RaycastOrigins {
+	private struct RaycastOrigins {
 
 		public Vector2 centerPosition;
 		public Vector2 boxSize;
