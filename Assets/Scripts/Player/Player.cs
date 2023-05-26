@@ -6,6 +6,8 @@ namespace Player {
 	[RequireComponent(typeof(PlayerController))]
 	public class Player : MonoBehaviour {
 
+		private const KeyCode jumpKey = KeyCode.Space;
+		
 		public float maxJumpHeight = 4;
 		public float minJumpHeight = 1;
 		public float timeToJumpApex = 0.4f;
@@ -29,7 +31,7 @@ namespace Player {
 		private void Start() {
 			gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
 			maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-			minJumpHeight = Mathf.Sqrt(2 * Math.Abs(gravity) * minJumpHeight);
+			minJumpVelocity = Mathf.Sqrt(2 * Math.Abs(gravity) * minJumpHeight);
 		}
 
 		private void FixedUpdate() {
@@ -46,12 +48,12 @@ namespace Player {
 					moveResult.isGrounded ? accelerationTimeGrounded : accelerationTimeAirborne);
 			velocity.y += gravity * Time.deltaTime;
 
-			if (moveResult.isGrounded && Input.GetKey(KeyCode.Space)) {
+			if (moveResult.isGrounded && Input.GetKey(jumpKey)) {
 				// TODO check slope sliding here
 				velocity.y = maxJumpVelocity;
 			}
 
-			if (velocity.y > minJumpVelocity && !Input.GetKey(KeyCode.Space)) {
+			if (velocity.y > minJumpVelocity && !Input.GetKey(jumpKey)) {
 				velocity.y = minJumpVelocity;
 			}
 		}

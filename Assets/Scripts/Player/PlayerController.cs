@@ -56,10 +56,13 @@ namespace Player {
 				Debug.LogWarning("ran out of step iterations, distance left: " + distanceLeft);
 			}
 
-			// TODO this is JANK
-			_moveResult.isGrounded = overrideIsGrounded || raycastController.CastBox(resultMove, Vector2.down, 0.05f);
+			_moveResult.isGrounded = overrideIsGrounded || CheckIsGrounded(resultMove);
 			transform.Translate(resultMove);
 			return _moveResult;
+		}
+
+		private bool CheckIsGrounded(Vector2 positionOffset) {
+			return raycastController.CastBox(positionOffset, Vector2.down, 0.05f);
 		}
 
 		private Vector2 ApplyVerticalMovement(float moveDistance) {
@@ -132,7 +135,7 @@ namespace Player {
 				Vector2 maxMove = raycastController.GetMaxMove(positionOffset, slopeUpDirection, distanceLeft);
 				distanceLeft -= maxMove.magnitude;
 				positionOffset += maxMove;
-			} else {
+			} else if (CheckIsGrounded(positionOffset)) {
 				TryStepAscend(ref positionOffset, moveDirection, ref distanceLeft, ref overrideIsGrounded);
 			}
 		}
@@ -154,7 +157,7 @@ namespace Player {
 			if (stepHitHeight <= 0) {
 				return;
 			}
-			
+
 			float requiredHeadHeight = raycastController.GetControllerHeight() - (stepHeight - stepHitHeight);
 			RaycastHit2D stepUpHit = moveDirection.x >= 0
 					? raycastController.CastRayBottomRight(positionOffset + stepCastOffset, Vector2.up, requiredHeadHeight)
