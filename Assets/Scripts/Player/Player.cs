@@ -51,18 +51,20 @@ namespace Player {
 			float targetVelocityX = directionalInput.x * moveSpeed;
 			velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing,
 					moveResult.isGrounded ? accelerationTimeGrounded : accelerationTimeAirborne);
-
-			// TODO slope sliding, ...
-			if (moveResult.isGrounded || moveResult.hitCeiling) {
+			
+			if ((moveResult.isGrounded && !moveResult.isSliding) || moveResult.hitCeiling) {
 				velocity.y = 0;
 			} else {
 				velocity.y = Math.Max(velocity.y + (gravity * Time.deltaTime), maxFallSpeed);
 			}
 
 			if (jumpInfo.ShouldJump) {
-				// TODO check slope sliding here
 				jumpInfo.OnJump();
-				velocity.y = maxJumpVelocity;
+				if (moveResult.isSliding) {
+					velocity = moveResult.slideSlopeNormal * maxJumpVelocity;
+				} else {
+					velocity.y = maxJumpVelocity;					
+				}
 			}
 
 			if (velocity.y > minJumpVelocity && !jumpPressed) {

@@ -78,8 +78,23 @@ public class RaycastController : MonoBehaviour {
 		}
 
 		didCollide = hit;
-		if (!didCollide) {
+		return GetMaxMove(hit, targetDirection, targetDistance);
+	}
+	
+	/// <summary>
+	/// Find the maximum move distance without intersecting with a collider
+	/// </summary>
+	/// <param name="hit">collider hit that inhibits this movement</param>
+	/// <param name="targetDirection">direction to check for collisions</param>
+	/// <param name="targetDistance">distance to check</param>
+	/// <returns>farthest possible move</returns>
+	public Vector2 GetMaxMove(RaycastHit2D hit, Vector2 targetDirection, float targetDistance) {
+		if (!hit) {
 			return targetDirection * targetDistance;
+		}
+		
+		if (hit.distance == 0) {
+			return hit.normal * targetDistance;
 		}
 
 		return targetDirection * (hit.distance - (skinWidth * 2)); // twice skin width to keep a safe distance from colliders

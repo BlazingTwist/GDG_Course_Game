@@ -31,7 +31,9 @@ namespace Player {
 
 			raycastController.UpdateBounds();
 			Vector2 resultMove = Vector2.zero;
-			
+
+			moveResult.isGrounded = false;
+			moveResult.isSliding = false;
 			moveResult.hitCeiling = false;
 			moveResult.wasSteppingUp = moveResult.isSteppingUp;
 			moveResult.isSteppingUp = false;
@@ -69,17 +71,34 @@ namespace Player {
 		}
 
 		private Vector2 ApplyVerticalMovement(float moveDistance) {
-			// TODO slide down steep slopes
-			Vector2 resultMove = moveDistance switch {
-					> 0 => raycastController.GetMaxMove(Vector2.up, moveDistance, out moveResult.hitCeiling),
-					< 0 => raycastController.GetMaxMove(Vector2.down, Math.Abs(moveDistance), out moveResult.isGrounded),
-					_ => Vector2.zero,
-			};
-			return resultMove;
+			float absMoveDistance = Math.Abs(moveDistance);
+			RaycastHit2D groundedHit = raycastController.CastBox(Vector2.zero, Vector2.down, absMoveDistance + 0.1f);
+			if (groundedHit) {
+				moveResult.isGrounded = true;
+				float slopeAngle = Vector2.Angle(groundedHit.normal, Vector2.up);
+				moveResult.isSliding = slopeAngle > maxSlopeAngle;
+				moveResult.slideSlopeNormal = groundedHit.normal;
+			}
+
+			if (moveDistance > 0) {
+				return raycastController.GetMaxMove(Vector2.up, moveDistance, out moveResult.hitCeiling);
+			}
+
+			if (!moveResult.isGrounded) {
+				return raycastController.GetMaxMove(groundedHit, Vector2.down, absMoveDistance);
+			}
+
+			if (moveResult.isSliding) {
+				Vector2 slopeDownDirection = Vector2.Perpendicular(groundedHit.normal) * (groundedHit.normal.x >= 0 ? -1 : 1);
+				Vector2 maxMove = raycastController.GetMaxMove(slopeDownDirection, absMoveDistance, out _);
+				return maxMove;
+			}
+
+			return raycastController.GetMaxMove(groundedHit, Vector2.down, absMoveDistance);
 		}
 
 		private void TrySlopeDescend(ref Vector2 positionOffset, Vector2 moveDirection, ref float distanceLeft) {
-			if (distanceLeft <= 0) {
+			if (distanceLeft <= 0 || moveResult.isSliding) {
 				return;
 			}
 
@@ -119,7 +138,7 @@ namespace Player {
 		}
 
 		private void TrySlopeAscend(ref Vector2 positionOffset, Vector2 moveDirection, ref float distanceLeft) {
-			if (distanceLeft <= 0) {
+			if (distanceLeft <= 0 || moveResult.isSliding) {
 				return;
 			}
 
@@ -162,6 +181,11 @@ namespace Player {
 				return;
 			}
 
+			float stepAngle = Vector2.Angle(stepHit.normal, Vector2.up);
+			if (stepAngle > maxSlopeAngle) {
+				return;
+			}
+
 			float requiredHeadHeight = raycastController.GetControllerHeight() - (stepHeight - stepHitHeight);
 			RaycastHit2D stepUpHit = moveDirection.x >= 0
 					? raycastController.CastRayBottomRight(positionOffset + stepCastOffset, Vector2.up, requiredHeadHeight)
@@ -188,7 +212,9 @@ namespace Player {
 
 			public bool hitCeiling;
 			public bool isGrounded;
-			
+			public bool isSliding;
+			public Vector2 slideSlopeNormal;
+
 			public bool isSteppingUp;
 			public bool wasSteppingUp;
 
