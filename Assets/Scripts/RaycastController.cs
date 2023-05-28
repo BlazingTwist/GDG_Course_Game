@@ -49,9 +49,10 @@ public class RaycastController : MonoBehaviour {
 	/// </summary>
 	/// <param name="targetDirection">direction to check for collisions</param>
 	/// <param name="targetDistance">distance to check</param>
+	/// <param name="didCollide">true if the move is limited by a collision</param>
 	/// <returns>farthest possible move</returns>
-	public Vector2 GetMaxMove(Vector2 targetDirection, float targetDistance) {
-		return GetMaxMove(Vector2.zero, targetDirection, targetDistance);
+	public Vector2 GetMaxMove(Vector2 targetDirection, float targetDistance, out bool didCollide) {
+		return GetMaxMove(Vector2.zero, targetDirection, targetDistance, out didCollide);
 	}
 
 	/// <summary>
@@ -60,8 +61,9 @@ public class RaycastController : MonoBehaviour {
 	/// <param name="positionOffset">offset to apply to the current collider position</param>
 	/// <param name="targetDirection">direction to check for collisions</param>
 	/// <param name="targetDistance">distance to check</param>
+	/// <param name="didCollide">true if the move is limited by a collision</param>
 	/// <returns>farthest possible move</returns>
-	public Vector2 GetMaxMove(Vector2 positionOffset, Vector2 targetDirection, float targetDistance) {
+	public Vector2 GetMaxMove(Vector2 positionOffset, Vector2 targetDirection, float targetDistance, out bool didCollide) {
 		RaycastHit2D hit = Physics2D.BoxCast(
 				raycastOrigin.centerPosition + positionOffset,
 				raycastOrigin.boxSize,
@@ -75,11 +77,12 @@ public class RaycastController : MonoBehaviour {
 			Debug.DrawRay(raycastOrigin.centerPosition + positionOffset, targetDirection, Color.red);
 		}
 
-		if (!hit) {
+		didCollide = hit;
+		if (!didCollide) {
 			return targetDirection * targetDistance;
 		}
 
-		return targetDirection * (hit.distance - skinWidth);
+		return targetDirection * (hit.distance - (skinWidth * 2)); // twice skin width to keep a safe distance from colliders
 	}
 
 	public RaycastHit2D CastRayBottomLeft(Vector2 positionOffset, Vector2 direction, float distance) {
