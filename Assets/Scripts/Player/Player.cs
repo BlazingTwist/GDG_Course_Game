@@ -1,11 +1,12 @@
 ﻿using System;
 using Input;
+using Physics;
 using Ui;
 using UnityEngine;
 
 namespace Player {
 
-	[RequireComponent(typeof(PlayerController))]
+	[RequireComponent(typeof(PhysicsMoveController))]
 	public class Player : MonoBehaviour {
 
 		[Header("Jumping")]
@@ -24,7 +25,7 @@ namespace Player {
 
 		private EFSInputManager inputManager;
 		private UiManager uiManager;
-		private PlayerController playerController;
+		private PhysicsMoveController physicsMoveController;
 
 		private float pauseCooldownLeft; // prevents pause buffering
 
@@ -38,13 +39,13 @@ namespace Player {
 
 
 		private void Awake() {
-			playerController = GetComponent<PlayerController>();
+			physicsMoveController = GetComponent<PhysicsMoveController>();
 		}
 
 		private void Start() {
-			GameController gameController = GameController.GetInstance();
-			inputManager = gameController.GetInputManager();
-			uiManager = gameController.GetUiController();
+			GameManager gameManager = GameManager.GetInstance();
+			inputManager = gameManager.GetInputManager();
+			uiManager = gameManager.GetUiController();
 
 			gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
 			maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -63,7 +64,7 @@ namespace Player {
 		}
 
 		private void FixedUpdate() {
-			PlayerController.MoveResult moveResult = playerController.Move(velocity * Time.deltaTime);
+			PhysicsMoveController.MoveResult moveResult = physicsMoveController.Move(velocity * Time.deltaTime);
 			bool jumpPressed = inputManager.GetButton(EGameplay_Button.Jump).IsTriggered();
 
 			UpdateJumpInfo(moveResult, jumpPressed);
@@ -92,7 +93,7 @@ namespace Player {
 			}
 		}
 
-		private void UpdateJumpInfo(PlayerController.MoveResult moveResult, bool jumpPressed) {
+		private void UpdateJumpInfo(PhysicsMoveController.MoveResult moveResult, bool jumpPressed) {
 			if (moveResult.isGrounded) {
 				jumpInfo.coyoteTimeLeft = coyoteTime;
 			} else {

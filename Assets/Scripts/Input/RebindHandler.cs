@@ -24,8 +24,8 @@ namespace Input {
 		private int bindingIndex;
 
 		private void Start() {
-			GameController gameController = GameController.GetInstance();
-			inputManager = gameController.GetInputManager();
+			GameManager gameManager = GameManager.GetInstance();
+			inputManager = gameManager.GetInputManager();
 		}
 
 		[PublicAPI]

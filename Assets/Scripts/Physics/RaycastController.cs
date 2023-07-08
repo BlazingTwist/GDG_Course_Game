@@ -80,7 +80,7 @@ public class RaycastController : MonoBehaviour {
 		didCollide = hit;
 		return GetMaxMove(hit, targetDirection, targetDistance);
 	}
-	
+
 	/// <summary>
 	/// Find the maximum move distance without intersecting with a collider
 	/// </summary>
@@ -92,12 +92,13 @@ public class RaycastController : MonoBehaviour {
 		if (!hit) {
 			return targetDirection * targetDistance;
 		}
-		
-		if (hit.distance == 0) {
-			return hit.normal * targetDistance;
+
+		if (hit.distance <= (skinWidth * 2f)) {
+			return Vector2.zero;
 		}
 
-		return targetDirection * (hit.distance - (skinWidth * 2)); // twice skin width to keep a safe distance from colliders
+		float moveDistance = hit.distance - (skinWidth * 2f);
+		return targetDirection * moveDistance;
 	}
 
 	public RaycastHit2D CastRayBottomLeft(Vector2 positionOffset, Vector2 direction, float distance) {

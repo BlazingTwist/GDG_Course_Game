@@ -266,8 +266,8 @@ GameObject:
   - component: {fileID: 185545812}
   - component: {fileID: 185545811}
   - component: {fileID: 185545810}
-  - component: {fileID: 185545809}
   - component: {fileID: 185545808}
+  - component: {fileID: 185545815}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -297,21 +297,6 @@ MonoBehaviour:
   accelerationTimeAirborne: 0.2
   accelerationTimeGrounded: 0.1
   moveSpeed: 12
---- !u!114 &185545809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 185545807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 072db7d557d64d35bc2f5911428f5bc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxStepIterations: 5
-  maxSlopeAngle: 80
-  stepHeight: 0.6
 --- !u!114 &185545810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556537965f084f3eba7b229937903295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawDebug: 1
+  drawDebug: 0
   collisionMask:
     serializedVersion: 2
     m_Bits: 64
@@ -412,13 +397,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185545807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.58, y: -3.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &185545815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185545807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2297fc45c9e5b541938a089c0de5bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxStepIterations: 5
+  maxSlopeAngle: 45
+  stepHeight: 0.6
+  mass: 10
 --- !u!1 &221259485
 GameObject:
   m_ObjectHideFlags: 0
@@ -24412,7 +24413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9156c8971bb9fe84eb94cf5ac777fd98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 2, y: 0}
+  velocity: {x: 4, y: 0}
 --- !u!114 &904331077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24513,8 +24514,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904331075}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.64, y: -4.98, z: 0}
-  m_LocalScale: {x: 7.98, y: 1, z: 1}
+  m_LocalPosition: {x: -7.1, y: -2.16, z: 0}
+  m_LocalScale: {x: 7.98, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

@@ -12,9 +12,9 @@ namespace Ui {
 		private EFSInputManager inputManager;
 
 		private void Awake() {
-			GameController gameController = GameController.GetInstance();
-			uiManager = gameController.GetUiController();
-			inputManager = gameController.GetInputManager();
+			GameManager gameManager = GameManager.GetInstance();
+			uiManager = gameManager.GetUiController();
+			inputManager = gameManager.GetInputManager();
 		}
 
 		private void Update() {

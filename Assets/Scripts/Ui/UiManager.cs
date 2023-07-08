@@ -12,8 +12,8 @@ namespace Ui {
 		private EFSInputManager inputManager;
 
 		private void Start() {
-			GameController gameController = GameController.GetInstance();
-			inputManager = gameController.GetInputManager();
+			GameManager gameManager = GameManager.GetInstance();
+			inputManager = gameManager.GetInputManager();
 		}
 
 		public void OpenPauseMenu() {

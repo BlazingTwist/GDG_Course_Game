@@ -16,8 +16,8 @@ namespace Ui {
 		};
 
 		private void Start() {
-			GameController gameController = GameController.GetInstance();
-			EFSInputManager inputManager = gameController.GetInputManager();
+			GameManager gameManager = GameManager.GetInstance();
+			EFSInputManager inputManager = gameManager.GetInputManager();
 
 			Transform containerTransform = targetContainer.transform;
 

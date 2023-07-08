@@ -5,8 +5,8 @@ using UnityEngine;
 /// <summary>
 /// Contains a reference to all of the singleton Manager/Controller components
 /// </summary>
-public class GameController : MonoBehaviour {
-	private static GameController instance;
+public class GameManager : MonoBehaviour {
+	private static GameManager instance;
 
 	[SerializeField] private EFSInputManager inputManager;
 	[SerializeField] private UiManager uiManager;
@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour {
 		instance = this;
 	}
 
-	public static GameController GetInstance() {
+	public static GameManager GetInstance() {
 		return instance;
 	}
 
