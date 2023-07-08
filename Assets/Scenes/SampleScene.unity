@@ -24783,7 +24783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 1833989032}
-  uiController: {fileID: 1833989035}
+  uiManager: {fileID: 1833989035}
 --- !u!1 &1926193909
 GameObject:
   m_ObjectHideFlags: 0

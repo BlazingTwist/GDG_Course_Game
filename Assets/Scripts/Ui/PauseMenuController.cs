@@ -8,18 +8,18 @@ namespace Ui {
 	/// </summary>
 	public class PauseMenuController : MonoBehaviour {
 
-		private UiController uiController;
+		private UiManager uiManager;
 		private EFSInputManager inputManager;
 
 		private void Awake() {
 			GameController gameController = GameController.GetInstance();
-			uiController = gameController.GetUiController();
+			uiManager = gameController.GetUiController();
 			inputManager = gameController.GetInputManager();
 		}
 
 		private void Update() {
 			if (inputManager.GetButton(EMenu_Button.Back).IsTriggered(0)) {
-				uiController.ClosePauseMenu();
+				uiManager.ClosePauseMenu();
 			}
 		}
 	}

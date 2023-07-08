@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
 	private static GameController instance;
 
 	[SerializeField] private EFSInputManager inputManager;
-	[SerializeField] private UiController uiController;
+	[SerializeField] private UiManager uiManager;
 
 	private void Awake() {
 		instance = this;
@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour {
 		return inputManager;
 	}
 
-	public UiController GetUiController() {
-		return uiController;
+	public UiManager GetUiController() {
+		return uiManager;
 	}
 }

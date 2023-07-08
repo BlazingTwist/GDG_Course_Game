@@ -6,7 +6,7 @@ namespace Ui {
 	/// <summary>
 	/// Singleton System for Controlling UI
 	/// </summary>
-	public class UiController : MonoBehaviour {
+	public class UiManager : MonoBehaviour {
 		[SerializeField] private GameObject pauseMenu;
 
 		private EFSInputManager inputManager;

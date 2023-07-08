@@ -23,7 +23,7 @@ namespace Player {
 		[SerializeField] private float moveSpeed = 6;
 
 		private EFSInputManager inputManager;
-		private UiController uiController;
+		private UiManager uiManager;
 		private PlayerController playerController;
 
 		private float pauseCooldownLeft; // prevents pause buffering
@@ -44,7 +44,7 @@ namespace Player {
 		private void Start() {
 			GameController gameController = GameController.GetInstance();
 			inputManager = gameController.GetInputManager();
-			uiController = gameController.GetUiController();
+			uiManager = gameController.GetUiController();
 
 			gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
 			maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -57,7 +57,7 @@ namespace Player {
 			} else {
 				if (inputManager.GetButton(EGameplay_Button.Pause).IsTriggered(0)) {
 					pauseCooldownLeft = 1f;
-					uiController.OpenPauseMenu();
+					uiManager.OpenPauseMenu();
 				}
 			}
 		}
