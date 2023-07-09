@@ -30,10 +30,7 @@ namespace Player {
 		private readonly Collider2D[] grabbedColliders = new Collider2D[4];
 
 		private EFSInputManager inputManager;
-		private UiManager uiManager;
 		private PhysicsMoveController moveController;
-
-		private float pauseCooldownLeft; // prevents pause buffering
 
 		private float gravity;
 		private float maxJumpVelocity;
@@ -51,24 +48,12 @@ namespace Player {
 		private void Start() {
 			GameManager gameManager = GameManager.GetInstance();
 			inputManager = gameManager.GetInputManager();
-			uiManager = gameManager.GetUiController();
 
 			gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
 			maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 			minJumpVelocity = Mathf.Sqrt(2 * Math.Abs(gravity) * minJumpHeight);
 		}
 
-		private void Update() {
-			if (pauseCooldownLeft > 0) {
-				pauseCooldownLeft -= Time.deltaTime;
-			} else {
-				if (inputManager.GetButton(EGameplay_Button.Pause).IsTriggered(0)) {
-					pauseCooldownLeft = 1f;
-					uiManager.OpenPauseMenu();
-				}
-			}
-		}
-		
 		private void FixedUpdate() {
 			moveController.PrepareMove();
 			

@@ -20,12 +20,14 @@ namespace Input {
 
 		[PublicAPI]
 		public void StartRebinding(InputHandler handler, int bindingIndex, Action callback) {
+			playerInput.DeactivateInput();
 			handler.inputAction.PerformInteractiveRebinding()
 					.WithTargetBinding(bindingIndex)
 					.OnMatchWaitForAnother(0.1f)
 					.OnComplete(operation => {
 						callback?.Invoke();
 						operation.Dispose();
+						playerInput.ActivateInput();
 					})
 					.Start();
 		}
@@ -174,10 +176,13 @@ namespace Input {
 		}
 
 		void IActions.Update(float dt) {
+			foreach (ButtonInput handler in buttonHandlers.Values) {
+				handler.Update(dt);
+			}
 			foreach (AxisInput handler in axisHandlers.Values) {
 				handler.Update(dt);
 			}
-			foreach (ButtonInput handler in buttonHandlers.Values) {
+			foreach (Axis2DInput handler in axis2DHandlers.Values) {
 				handler.Update(dt);
 			}
 		}
