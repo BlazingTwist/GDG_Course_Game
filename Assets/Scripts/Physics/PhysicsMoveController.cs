@@ -48,7 +48,6 @@ namespace Physics {
 		public void EnqueueGrabbedPushable(Collider2D pushable, Vector2 expectedMove) {
 			float dot = Vector2.Dot(expectedMove, pushable.transform.position - transform.position);
 			// if dot product is positive, pushable is in front of us, push before move
-			Debug.Log("dot: " + dot + " | enqueue");
 			EnqueuePush(dot > 0 ? pushBeforePlatform : pushAfterPlatform, pushable.transform);
 		}
 

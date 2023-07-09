@@ -79,7 +79,6 @@ namespace Player {
 						bounds.center, bounds.extents * 2f, 0, grabbedColliders, grabbableMask
 				);
 				for (int i = 0; i < numHits; i++) {
-					Debug.Log("enqueing");
 					moveController.EnqueueGrabbedPushable(grabbedColliders[i], targetMove);
 				}
 			}
