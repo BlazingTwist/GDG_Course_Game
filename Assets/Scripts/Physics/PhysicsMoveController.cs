@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Physics {
@@ -8,6 +10,7 @@ namespace Physics {
 		[SerializeField] private int maxStepIterations = 5;
 		[SerializeField] private float maxSlopeAngle = 80;
 		[SerializeField] private float stepHeight = 0.6f;
+		[SerializeField] private float slideSpeedFactor = 0.25f;
 
 		/// <summary>
 		/// Mass controls how Physics-Objects push each other.
@@ -18,17 +21,43 @@ namespace Physics {
 		/// </summary>
 		[SerializeField] private float mass = 10;
 
+		/// <summary>
+		/// Contains the transform IDs that were already pushed during this move operation to avoid recursive bombs...
+		/// </summary>
+		private static ConcurrentDictionary<int, byte> pushChain = new();
+
 		private RaycastController raycastController;
+
+		private readonly Queue<PushInfo> pushBeforePlatform = new(10);
+		private readonly Queue<PushInfo> pushAfterPlatform = new(10);
+		private readonly Dictionary<Transform, TransformComponents> transformDictionary = new(10);
 
 		// Stored as field to avoid excess memory allocations
 		private MoveResult moveResult;
+		private Action<MoveResult> pushListener;
 
 		private void Awake() {
 			raycastController = GetComponent<RaycastController>();
 		}
 
+		public void PrepareMove() {
+			pushChain.Clear(); // normal move operation
+			pushChain[transform.GetInstanceID()] = 0;
+		}
+
+		public void EnqueueGrabbedPushable(Collider2D pushable, Vector2 expectedMove) {
+			float dot = Vector2.Dot(expectedMove, pushable.transform.position - transform.position);
+			// if dot product is positive, pushable is in front of us, push before move
+			Debug.Log("dot: " + dot + " | enqueue");
+			EnqueuePush(dot > 0 ? pushBeforePlatform : pushAfterPlatform, pushable.transform);
+		}
+
+		public void SetPushListener(Action<MoveResult> listener) {
+			pushListener = listener;
+		}
+
 		public MoveResult Move(Vector2 moveVector) {
-			return Move(moveVector, false);
+			return Move(moveVector, false, mass);
 		}
 
 		/// <summary>
@@ -46,12 +75,18 @@ namespace Physics {
 				return moveResult; // return previous result, should still be valid.
 			}
 
-			return pushingMass < 0
-					? Move(moveVector, true) // negative mass, push without slowing down
-					: Move(moveVector * ((mass + pushingMass) / pushingMass), true);
+			MoveResult pushResult = Move(moveVector, true, pushingMass);
+			pushListener?.Invoke(pushResult);
+			return pushResult;
 		}
 
-		private MoveResult Move(Vector2 moveVector, bool isForced) {
+		private MoveResult Move(Vector2 moveVector, bool isForced, float pushMass) {
+			raycastController.UpdateBounds();
+			raycastController.DisableCollisions();
+			float pushedMass = QueuePushes(moveVector);
+			moveVector *= (pushMass / (pushMass + pushedMass));
+			ApplyPushes(pushBeforePlatform, moveVector, pushMass);
+
 			// steps:
 			//   1. apply vertical movement
 			// :[move/slope/step]
@@ -61,7 +96,6 @@ namespace Physics {
 			//   5. try stepping up a step
 			//   6. if moveDistance not depleted, goto [move/slope/step]
 
-			raycastController.UpdateBounds();
 			TargetMove resultMove = new() {
 					isForced = isForced,
 					appliedMove = Vector2.zero,
@@ -106,12 +140,82 @@ namespace Physics {
 			if (!stuck && resultMove.remainingDistance > 0) {
 				Debug.LogWarning("ran out of step iterations, distance left: " + resultMove.remainingDistance);
 			}
-
 			moveResult.isGrounded = moveResult.isSteppingUp || CheckIsGrounded(resultMove.appliedMove);
 			transform.Translate(resultMove.appliedMove);
+			moveResult.moveDelta = resultMove.appliedMove;
+			ApplyPushes(pushAfterPlatform, resultMove.appliedMove, pushMass);
 
+			raycastController.RestoreCollisions();
 			return moveResult;
 		}
+
+		private float QueuePushes(Vector2 move) {
+			float totalPushWeight = 0;
+
+			if (move.y != 0f) {
+				float upFactor = move.y > 0 ? 1 : -1;
+				RaycastHit2D[] hitArray = raycastController.CastBoxPushLayer(Vector2.zero, Vector2.up * upFactor,
+						Mathf.Abs(move.y), out int numHits);
+				for (int i = 0; i < numHits; i++) {
+					RaycastHit2D hit = hitArray[i];
+					totalPushWeight += EnqueuePush(pushBeforePlatform, hit.transform);
+				}
+			}
+
+			if (move.x != 0f) {
+				float rightFactor = move.x > 0 ? 1 : -1;
+				RaycastHit2D[] hitArray = raycastController.CastBoxPushLayer(Vector2.zero, Vector2.right * rightFactor,
+						Mathf.Abs(move.x), out int numHits);
+				for (int i = 0; i < numHits; i++) {
+					RaycastHit2D hit = hitArray[i];
+					totalPushWeight += EnqueuePush(pushBeforePlatform, hit.transform);
+				}
+			}
+
+			// if the platform is moving downwards or strictly horizontally
+			// then check for players standing on the platform and move them
+			if (move.y < 0 || (move.y == 0 && move.x != 0)) {
+				RaycastHit2D[] hitArray = raycastController.CastBoxPushLayer(Vector2.zero, Vector2.up,
+						RaycastController.skinWidth * 3, out int numHits);
+				for (int i = 0; i < numHits; i++) {
+					RaycastHit2D hit = hitArray[i];
+					totalPushWeight += EnqueuePush(pushBeforePlatform, hit.transform);
+				}
+			}
+
+			return totalPushWeight;
+		}
+
+		private float EnqueuePush(Queue<PushInfo> queue, Transform pushTransform) {
+			int pushedId = pushTransform.GetInstanceID();
+			if (pushChain.ContainsKey(pushedId)) {
+				return 0;
+			}
+
+			pushChain[pushedId] = 0;
+			queue.Enqueue(new PushInfo(pushTransform));
+			EnsureTransformCached(pushTransform);
+			return transformDictionary[pushTransform].moveController.mass;
+		}
+
+		private void ApplyPushes(Queue<PushInfo> pushes, Vector2 move, float pushingMass) {
+			while (pushes.Count > 0) {
+				PushInfo push = pushes.Dequeue();
+				TransformComponents transformComponents = transformDictionary[push.movedTransform];
+				if (transformComponents.moveController != null) {
+					transformComponents.moveController.Push(move, pushingMass);
+				} else {
+					push.movedTransform.Translate(move);
+				}
+			}
+		}
+
+		private void EnsureTransformCached(Transform movedTransform) {
+			if (!transformDictionary.ContainsKey(movedTransform)) {
+				transformDictionary[movedTransform] = new TransformComponents(movedTransform.GetComponent<PhysicsMoveController>());
+			}
+		}
+
 
 		private bool CheckIsGrounded(Vector2 positionOffset) {
 			return raycastController.CastBox(positionOffset, Vector2.down, 0.05f);
@@ -146,7 +250,9 @@ namespace Physics {
 
 			if (moveResult.isSliding) {
 				Vector2 slopeDownDirection = Vector2.Perpendicular(groundedHit.normal) * (groundedHit.normal.x >= 0 ? -1 : 1);
-				Vector2 maxMove = raycastController.GetMaxMove(resultMove.appliedMove, slopeDownDirection, absMoveDistance, out _);
+				Vector2 maxMove = raycastController.GetMaxMove(
+						resultMove.appliedMove, slopeDownDirection, absMoveDistance * slideSpeedFactor, out _
+				);
 				return maxMove;
 			}
 
@@ -301,6 +407,24 @@ namespace Physics {
 			public bool isSteppingUp;
 			public bool wasSteppingUp;
 
+			public Vector2 moveDelta;
+
+		}
+
+		private readonly struct PushInfo {
+			public readonly Transform movedTransform;
+
+			public PushInfo(Transform movedTransform) {
+				this.movedTransform = movedTransform;
+			}
+		}
+
+		private readonly struct TransformComponents {
+			public readonly PhysicsMoveController moveController;
+
+			public TransformComponents(PhysicsMoveController moveController) {
+				this.moveController = moveController;
+			}
 		}
 	}
 

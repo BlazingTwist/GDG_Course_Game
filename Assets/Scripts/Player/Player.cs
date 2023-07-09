@@ -23,9 +23,15 @@ namespace Player {
 		[SerializeField] private float accelerationTimeGrounded = .1f;
 		[SerializeField] private float moveSpeed = 6;
 
+		[Header("Physics")]
+		[SerializeField] private BoxCollider2D grabCollider;
+		[SerializeField] private LayerMask grabbableMask;
+
+		private readonly Collider2D[] grabbedColliders = new Collider2D[4];
+
 		private EFSInputManager inputManager;
 		private UiManager uiManager;
-		private PhysicsMoveController physicsMoveController;
+		private PhysicsMoveController moveController;
 
 		private float pauseCooldownLeft; // prevents pause buffering
 
@@ -39,7 +45,7 @@ namespace Player {
 
 
 		private void Awake() {
-			physicsMoveController = GetComponent<PhysicsMoveController>();
+			moveController = GetComponent<PhysicsMoveController>();
 		}
 
 		private void Start() {
@@ -62,9 +68,23 @@ namespace Player {
 				}
 			}
 		}
-
+		
 		private void FixedUpdate() {
-			PhysicsMoveController.MoveResult moveResult = physicsMoveController.Move(velocity * Time.deltaTime);
+			moveController.PrepareMove();
+			
+			Vector2 targetMove = velocity * Time.fixedDeltaTime;
+			if (inputManager.GetButton(EGameplay_Button.Interact).IsTriggered()) {
+				Bounds bounds = grabCollider.bounds;
+				int numHits = Physics2D.OverlapBoxNonAlloc(
+						bounds.center, bounds.extents * 2f, 0, grabbedColliders, grabbableMask
+				);
+				for (int i = 0; i < numHits; i++) {
+					Debug.Log("enqueing");
+					moveController.EnqueueGrabbedPushable(grabbedColliders[i], targetMove);
+				}
+			}
+
+			PhysicsMoveController.MoveResult moveResult = moveController.Move(targetMove);
 			bool jumpPressed = inputManager.GetButton(EGameplay_Button.Jump).IsTriggered();
 
 			UpdateJumpInfo(moveResult, jumpPressed);
@@ -76,7 +96,7 @@ namespace Player {
 			if ((moveResult.isGrounded && !moveResult.isSliding) || moveResult.hitCeiling) {
 				velocity.y = 0;
 			} else {
-				velocity.y = Math.Max(velocity.y + (gravity * Time.deltaTime), maxFallSpeed);
+				velocity.y = Math.Max(velocity.y + (gravity * Time.fixedDeltaTime), maxFallSpeed);
 			}
 
 			if (jumpInfo.ShouldJump) {
