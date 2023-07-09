@@ -55,20 +55,18 @@ namespace Player {
 		}
 
 		private void FixedUpdate() {
-			moveController.PrepareMove();
-			
 			Vector2 targetMove = velocity * Time.fixedDeltaTime;
+			PhysicsMoveController.MoveResult moveResult;
 			if (inputManager.GetButton(EGameplay_Button.Interact).IsTriggered()) {
 				Bounds bounds = grabCollider.bounds;
 				int numHits = Physics2D.OverlapBoxNonAlloc(
 						bounds.center, bounds.extents * 2f, 0, grabbedColliders, grabbableMask
 				);
-				for (int i = 0; i < numHits; i++) {
-					moveController.EnqueueGrabbedPushable(grabbedColliders[i], targetMove);
-				}
+				moveResult = moveController.Move(targetMove, grabbedColliders, numHits);
+			} else {
+				moveResult = moveController.Move(targetMove);				
 			}
 
-			PhysicsMoveController.MoveResult moveResult = moveController.Move(targetMove);
 			bool jumpPressed = inputManager.GetButton(EGameplay_Button.Jump).IsTriggered();
 
 			UpdateJumpInfo(moveResult, jumpPressed);

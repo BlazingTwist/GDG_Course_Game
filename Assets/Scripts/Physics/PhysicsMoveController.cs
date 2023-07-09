@@ -24,7 +24,7 @@ namespace Physics {
 		/// <summary>
 		/// Contains the transform IDs that were already pushed during this move operation to avoid recursive bombs...
 		/// </summary>
-		private static ConcurrentDictionary<int, byte> pushChain = new();
+		private static readonly ConcurrentDictionary<int, byte> pushChain = new();
 
 		private RaycastController raycastController;
 
@@ -40,23 +40,30 @@ namespace Physics {
 			raycastController = GetComponent<RaycastController>();
 		}
 
-		public void PrepareMove() {
-			pushChain.Clear(); // normal move operation
-			pushChain[transform.GetInstanceID()] = 0;
-		}
-
-		public void EnqueueGrabbedPushable(Collider2D pushable, Vector2 expectedMove) {
-			float dot = Vector2.Dot(expectedMove, pushable.transform.position - transform.position);
-			// if dot product is positive, pushable is in front of us, push before move
-			EnqueuePush(dot > 0 ? pushBeforePlatform : pushAfterPlatform, pushable.transform);
-		}
-
 		public void SetPushListener(Action<MoveResult> listener) {
 			pushListener = listener;
 		}
 
 		public MoveResult Move(Vector2 moveVector) {
+			pushChain.Clear();
+			pushChain[transform.GetInstanceID()] = 0;
+			MoveResult result = Move(moveVector, false, mass);
+			return result;
+		}
+
+		public MoveResult Move(Vector2 moveVector, Collider2D[] pushableArray, int numElements) {
+			pushChain.Clear();
+			pushChain[transform.GetInstanceID()] = 0;
+			for (int i = 0; i < numElements; i++) {
+				EnqueueGrabbedPushable(pushableArray[i], moveVector);
+			}
 			return Move(moveVector, false, mass);
+		}
+		
+		private void EnqueueGrabbedPushable(Collider2D pushable, Vector2 expectedMove) {
+			float dot = Vector2.Dot(expectedMove, pushable.transform.position - transform.position);
+			// if dot product is positive, pushable is in front of us, push before move
+			EnqueuePush(dot > 0 ? pushBeforePlatform : pushAfterPlatform, pushable.transform);
 		}
 
 		/// <summary>
@@ -69,14 +76,13 @@ namespace Physics {
 		///   it will move up along that slope until the requested delta is reached. The resulting total move distance thus can be larger than the moveVector.
 		/// </li></ul>
 		/// </summary>
-		public MoveResult Push(Vector2 moveVector, float pushingMass) {
+		private void Push(Vector2 moveVector, float pushingMass) {
 			if (pushingMass == 0) {
-				return moveResult; // return previous result, should still be valid.
+				return;
 			}
 
 			MoveResult pushResult = Move(moveVector, true, pushingMass);
 			pushListener?.Invoke(pushResult);
-			return pushResult;
 		}
 
 		private MoveResult Move(Vector2 moveVector, bool isForced, float pushMass) {
@@ -316,7 +322,7 @@ namespace Physics {
 				Vector2 upOffset = new(0f, 0.1f); // dirty hack to ensure the player is pushed up slopes, I hate it, but it works.
 				Vector2 slopeUpDirection = (Vector2.Perpendicular(slopeNormal) * (moveDirection.x >= 0 ? -1 : 1)) + upOffset;
 				float moveDistance = move.isForced
-						? (move.remainingDistance / slopeUpDirection.x)
+						? (move.remainingDistance / Math.Abs(slopeUpDirection.x))
 						: move.remainingDistance;
 				Vector2 maxMove = raycastController.GetMaxMove(move.appliedMove + upOffset, slopeUpDirection, moveDistance, out _);
 				move.Update(maxMove);

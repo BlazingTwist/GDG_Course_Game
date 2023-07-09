@@ -3603,6 +3603,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2063897291}
     m_Modifications:
+    - target: {fileID: 1263905863203785042, guid: 2283cd288b5264d4ca5a3ca8bebf78fd, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1263905863203785042, guid: 2283cd288b5264d4ca5a3ca8bebf78fd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1263905864018173975, guid: 2283cd288b5264d4ca5a3ca8bebf78fd, type: 3}
       propertyPath: m_Name
       value: RebindMenu
@@ -3677,7 +3685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1263905864018173976, guid: 2283cd288b5264d4ca5a3ca8bebf78fd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 1263905864018173976, guid: 2283cd288b5264d4ca5a3ca8bebf78fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3690,6 +3698,10 @@ PrefabInstance:
     - target: {fileID: 1263905864018173976, guid: 2283cd288b5264d4ca5a3ca8bebf78fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1263905864543917566, guid: 2283cd288b5264d4ca5a3ca8bebf78fd, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7136015895247259619, guid: 2283cd288b5264d4ca5a3ca8bebf78fd, type: 3}
       propertyPath: m_IsActive

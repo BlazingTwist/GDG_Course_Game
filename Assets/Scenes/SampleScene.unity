@@ -277,7 +277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185545807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.58, y: -3.05, z: 0}
+  m_LocalPosition: {x: -3.11, y: 4.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24171,8 +24171,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904331075}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.29, y: 2.53, z: 0}
-  m_LocalScale: {x: 4.4125, y: 2.2, z: 1}
+  m_LocalPosition: {x: 3.06, y: -3.21, z: 0}
+  m_LocalScale: {x: 4.4125, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -24207,7 +24207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9156c8971bb9fe84eb94cf5ac777fd98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: -1}
+  velocity: {x: -4, y: 0}
 --- !u!1001 &1116776964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24265,15 +24265,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5418226217619349662, guid: 77f34ef3944ade94d9b189c37c90110e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5418226217619349662, guid: 77f34ef3944ade94d9b189c37c90110e, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418226218152347842, guid: 77f34ef3944ade94d9b189c37c90110e, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5418226218418781234, guid: 77f34ef3944ade94d9b189c37c90110e, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77f34ef3944ade94d9b189c37c90110e, type: 3}
@@ -24389,7 +24393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556537965f084f3eba7b229937903295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawDebug: 0
+  drawDebug: 1
   noCollisionLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -24483,7 +24487,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297304738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.23, y: 0.05, z: 0}
+  m_LocalPosition: {x: -8.26, y: -4.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

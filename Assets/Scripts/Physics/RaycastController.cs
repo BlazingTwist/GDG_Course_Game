@@ -65,6 +65,11 @@ namespace Physics {
 			return collider.size.y;
 		}
 
+		public void DrawLine(Vector2 positionOffset, Vector2 direction, Color color, float duration) {
+			Vector2 startPosition = raycastOrigin.centerPosition + positionOffset;
+			Debug.DrawLine(startPosition, startPosition + direction, color, duration);
+		}
+
 		/// <summary>
 		/// Find the maximum move distance without intersecting with a collider
 		/// </summary>
@@ -94,10 +99,6 @@ namespace Physics {
 					collisionMask
 			);
 
-			if (drawDebug) {
-				Debug.DrawRay(raycastOrigin.centerPosition + positionOffset, targetDirection, Color.red);
-			}
-
 			didCollide = hit;
 			return GetMaxMove(hit, targetDirection, targetDistance);
 		}
@@ -110,6 +111,10 @@ namespace Physics {
 		/// <param name="targetDistance">distance to check</param>
 		/// <returns>farthest possible move</returns>
 		public Vector2 GetMaxMove(RaycastHit2D hit, Vector2 targetDirection, float targetDistance) {
+			if (drawDebug) {
+				Debug.DrawRay(raycastOrigin.centerPosition, targetDirection.normalized, Color.red, 0.1f);
+			}
+			
 			if (!hit) {
 				return targetDirection * targetDistance;
 			}
