@@ -1,12 +1,13 @@
 ﻿using System;
+using Input;
+using Physics;
+using Ui;
 using UnityEngine;
 
 namespace Player {
 
-	[RequireComponent(typeof(PlayerController))]
+	[RequireComponent(typeof(PhysicsMoveController))]
 	public class Player : MonoBehaviour {
-
-		private const KeyCode jumpKey = KeyCode.Space;
 
 		[Header("Jumping")]
 		[SerializeField] private float maxJumpHeight = 4;
@@ -15,11 +16,21 @@ namespace Player {
 		[SerializeField] private float maxFallSpeed = -18f;
 		[SerializeField] private float coyoteTime = 0.1f;
 		[SerializeField] private float jumpBufferTime = 0.1f;
+		[SerializeField] private float jumpCooldownTime = 0.2f;
 
 		[Header("Horizontal Movement")]
 		[SerializeField] private float accelerationTimeAirborne = .2f;
 		[SerializeField] private float accelerationTimeGrounded = .1f;
 		[SerializeField] private float moveSpeed = 6;
+
+		[Header("Physics")]
+		[SerializeField] private BoxCollider2D grabCollider;
+		[SerializeField] private LayerMask grabbableMask;
+
+		private readonly Collider2D[] grabbedColliders = new Collider2D[4];
+
+		private EFSInputManager inputManager;
+		private PhysicsMoveController moveController;
 
 		private float gravity;
 		private float maxJumpVelocity;
@@ -29,41 +40,53 @@ namespace Player {
 		private Vector3 velocity;
 		private float velocityXSmoothing;
 
-		private PlayerController playerController;
 
 		private void Awake() {
-			playerController = GetComponent<PlayerController>();
+			moveController = GetComponent<PhysicsMoveController>();
 		}
 
 		private void Start() {
+			GameManager gameManager = GameManager.GetInstance();
+			inputManager = gameManager.GetInputManager();
+
 			gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
 			maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 			minJumpVelocity = Mathf.Sqrt(2 * Math.Abs(gravity) * minJumpHeight);
 		}
 
 		private void FixedUpdate() {
-			PlayerController.MoveResult moveResult = playerController.Move(velocity * Time.deltaTime);
-			bool jumpPressed = Input.GetKey(jumpKey); // TODO this actually shouldn't be in fixed update, but whatever.
+			Vector2 targetMove = velocity * Time.fixedDeltaTime;
+			PhysicsMoveController.MoveResult moveResult;
+			if (inputManager.GetButton(EGameplay_Button.Interact).IsTriggered()) {
+				Bounds bounds = grabCollider.bounds;
+				int numHits = Physics2D.OverlapBoxNonAlloc(
+						bounds.center, bounds.extents * 2f, 0, grabbedColliders, grabbableMask
+				);
+				moveResult = moveController.Move(targetMove, grabbedColliders, numHits);
+			} else {
+				moveResult = moveController.Move(targetMove);				
+			}
+
+			bool jumpPressed = inputManager.GetButton(EGameplay_Button.Jump).IsTriggered();
 
 			UpdateJumpInfo(moveResult, jumpPressed);
 
-			Vector2 directionalInput = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-			float targetVelocityX = directionalInput.x * moveSpeed;
+			float targetVelocityX = inputManager.GetAxis(EGameplay_Axis.MoveHorizontal).GetValue() * moveSpeed;
 			velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing,
 					moveResult.isGrounded ? accelerationTimeGrounded : accelerationTimeAirborne);
-			
+
 			if ((moveResult.isGrounded && !moveResult.isSliding) || moveResult.hitCeiling) {
 				velocity.y = 0;
 			} else {
-				velocity.y = Math.Max(velocity.y + (gravity * Time.deltaTime), maxFallSpeed);
+				velocity.y = Math.Max(velocity.y + (gravity * Time.fixedDeltaTime), maxFallSpeed);
 			}
 
 			if (jumpInfo.ShouldJump) {
-				jumpInfo.OnJump();
+				jumpInfo.OnJump(jumpCooldownTime);
 				if (moveResult.isSliding) {
 					velocity = moveResult.slideSlopeNormal * maxJumpVelocity;
 				} else {
-					velocity.y = maxJumpVelocity;					
+					velocity.y = maxJumpVelocity;
 				}
 			}
 
@@ -72,7 +95,7 @@ namespace Player {
 			}
 		}
 
-		private void UpdateJumpInfo(PlayerController.MoveResult moveResult, bool jumpPressed) {
+		private void UpdateJumpInfo(PhysicsMoveController.MoveResult moveResult, bool jumpPressed) {
 			if (moveResult.isGrounded) {
 				jumpInfo.coyoteTimeLeft = coyoteTime;
 			} else {
@@ -84,6 +107,8 @@ namespace Player {
 			} else {
 				jumpInfo.jumpBufferTimeLeft -= Time.fixedDeltaTime;
 			}
+
+			jumpInfo.jumpCooldownTimeLeft -= Time.fixedDeltaTime;
 		}
 
 		private struct JumpInfo {
@@ -99,11 +124,14 @@ namespace Player {
 			/// </summary>
 			public float jumpBufferTimeLeft;
 
-			public bool ShouldJump => coyoteTimeLeft > 0 && jumpBufferTimeLeft > 0;
+			public float jumpCooldownTimeLeft;
 
-			public void OnJump() {
+			public bool ShouldJump => coyoteTimeLeft > 0 && jumpBufferTimeLeft > 0 && jumpCooldownTimeLeft <= 0;
+
+			public void OnJump(float cooldownTime) {
 				coyoteTimeLeft = 0; // ensure we can only jump once in air
 				jumpBufferTimeLeft = 0; // avoid jumping twice by doing some weird slope interaction
+				jumpCooldownTimeLeft = cooldownTime;
 			}
 
 		}
