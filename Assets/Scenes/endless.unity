@@ -1154,7 +1154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08e6acb5bff66a468891c1c263f8e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 0}
+  tilemap: {fileID: 415531368}
   repeatInterval: 10
 --- !u!1 &540582411
 GameObject:
