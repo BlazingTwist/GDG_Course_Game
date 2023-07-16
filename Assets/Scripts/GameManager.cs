@@ -1,5 +1,6 @@
 using Input;
 using UnityEngine;
+using World;
 
 /// <summary>
 /// Contains a reference to all of the singleton Manager/Controller components
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour {
 	private static GameManager instance;
 
 	[SerializeField] private EFSInputManager inputManager;
+	[SerializeField] private InteractManager interactManager;
 	[SerializeField] private float pauseCooldown = 0.5f; // prevents pause buffering
 
 	public event OnPauseChanged PauseEvent;
@@ -36,6 +38,10 @@ public class GameManager : MonoBehaviour {
 
 	public EFSInputManager GetInputManager() {
 		return inputManager;
+	}
+
+	public InteractManager GetInteractManager() {
+		return interactManager;
 	}
 
 	public void Pause() {

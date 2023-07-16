@@ -8,8 +8,11 @@ using UnityEngine.InputSystem;
 namespace Input {
 
 	public class EFSInputManager : MonoBehaviour {
-		[SerializeField] private PlayerInput playerInput;
 
+		public event OnKeyRebind RebindEvent;
+		public delegate void OnKeyRebind(InputHandler input, int bindingIndex);
+		
+		[SerializeField] private PlayerInput playerInput;
 		private IActions activeActions;
 
 		[PublicAPI]
@@ -26,6 +29,7 @@ namespace Input {
 					.OnMatchWaitForAnother(0.1f)
 					.OnComplete(operation => {
 						callback?.Invoke();
+						RebindEvent?.Invoke(handler, bindingIndex);
 						operation.Dispose();
 						playerInput.ActivateInput();
 					})
