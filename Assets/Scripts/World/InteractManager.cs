@@ -24,13 +24,23 @@ namespace World {
 
 		private void OnEnable() {
 			interactables = FindObjectsOfType<Interactable>();
-		}
-
-		private void Start() {
+			
 			gameManager = GameManager.GetInstance();
 			inputManager = gameManager.GetInputManager();
 			inputManager.GetButton(EGameplay_Button.Interact).AddTriggerCallback(OnInteractPressed);
+			inputManager.GetButton(EMenu_Button.Back).AddTriggerCallback(OnNavBackKeyEvent);
+		}
 
+		private void OnDisable() {
+			inputManager.GetButton(EGameplay_Button.Interact).RemoveTriggerCallback(OnInteractPressed);
+			inputManager.GetButton(EMenu_Button.Back).RemoveTriggerCallback(OnNavBackKeyEvent);
+		}
+
+		private void OnNavBackKeyEvent(InputAction.CallbackContext context) {
+			OnTextPopupClosed();
+		}
+
+		private void Start() {
 			// ensure state is synced
 			interactPrompt.transform.parent.gameObject.SetActive(true);
 			interactPrompt.SetActive(promptEnabled);
@@ -46,6 +56,7 @@ namespace World {
 
 			popUpActive = true;
 			SetPromptEnabled(false);
+			interactTarget.OnInteractStart();
 			titleText.text = interactTarget.TitleText;
 			contentText.text = interactTarget.DisplayText;
 			textPopupObject.SetActive(true);
@@ -54,6 +65,7 @@ namespace World {
 
 		public void OnTextPopupClosed() {
 			popUpActive = false;
+			interactTarget.OnInteractComplete();
 			textPopupObject.SetActive(false);
 			inputManager.SetActiveActions(inputManager.GameplayActions);
 		}
@@ -67,6 +79,10 @@ namespace World {
 			Interactable nearestInteractable = null;
 			float minDistanceSquared = float.PositiveInfinity;
 			foreach (Interactable interactable in interactables) {
+				if (!interactable.gameObject.activeSelf) {
+					continue;
+				}
+
 				float distanceSquared = (interactable.transform.position - playerPosition).sqrMagnitude;
 				if (distanceSquared < minDistanceSquared) {
 					minDistanceSquared = distanceSquared;

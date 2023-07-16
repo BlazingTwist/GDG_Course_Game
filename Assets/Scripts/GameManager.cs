@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 
 	[SerializeField] private EFSInputManager inputManager;
 	[SerializeField] private InteractManager interactManager;
+	[SerializeField] private LevelProgressManager levelProgressManager;
 	[SerializeField] private float pauseCooldown = 0.5f; // prevents pause buffering
 
 	public event OnPauseChanged PauseEvent;
@@ -42,6 +43,10 @@ public class GameManager : MonoBehaviour {
 
 	public InteractManager GetInteractManager() {
 		return interactManager;
+	}
+
+	public LevelProgressManager GetLevelProgressManager() {
+		return levelProgressManager;
 	}
 
 	public void Pause() {
