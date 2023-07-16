@@ -11,4 +11,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 1 - Zelle.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Level 2.unity
+    guid: 907a945fa64300b45b6e5f19c553c996
+  - enabled: 1
+    path: Assets/Scenes/Level 3.unity
+    guid: c799bb83db9197d4fa07678435616fd9
+  - enabled: 1
+    path: Assets/Scenes/Level 4a - See 1.unity
+    guid: 1c82c8d83657e5640bd99312276c3bc0
+  - enabled: 1
+    path: Assets/Scenes/Level 4b - Workbench.unity
+    guid: 5a9f8edfe08dfc24992144c7f012db3a
+  - enabled: 1
+    path: Assets/Scenes/Level 4c Schiff.unity
+    guid: 4e91c6edc30e9f449bd7f5e73dd8aa89
+  - enabled: 1
+    path: Assets/Scenes/Level 5 - Kampfarena.unity
+    guid: 74e45d21113a41344966cc65c5bbaf19
   m_configObjects: {}
