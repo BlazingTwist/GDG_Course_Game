@@ -324,6 +324,70 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1763726842634007030, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726842634007030, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726842634007030, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726842634007030, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726843122697502, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -1130.7999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726843122697502, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -782.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726843308807825, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726843943926596, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726843943926596, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726843943926596, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726843943926596, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -268.02002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726844705278971, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726844705278971, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726844705278971, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 123.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726844705278971, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763726844705278971, guid: fed605f30be88d345b484078dc41d898, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -151.51001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fed605f30be88d345b484078dc41d898, type: 3}
 --- !u!1 &338065789
@@ -1355,13 +1419,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Springen - Leertaste
-
-    Bewegen - WASD (/Pfeiltasten)
-
-    Pause - Escape
-
-'
+  m_text: "Du spielst als ein Kriegsgefangener auf der Gef\xE4ngnisinsel in Tenebrion.\n\nDein
+    Ziel ist es in dein Heimatland, Solaria, zur\xFCck zu kommen."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1844,7 +1903,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Anleitung
+  m_text: 'Einleitung
 
 '
   m_isRightToLeft: 0
@@ -2079,7 +2138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1286448715}
   m_Layer: 5
-  m_Name: Anleitung
+  m_Name: 'Einleitung '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2525,7 +2584,7 @@ GameObject:
   - component: {fileID: 1665339000}
   - component: {fileID: 1665338999}
   m_Layer: 5
-  m_Name: Anleitung
+  m_Name: 'Einleitung '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2800,7 +2859,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Anleitung
+  m_text: Einleitung
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

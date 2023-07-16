@@ -300,6 +300,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1096140315703850009}
     m_Modifications:
+    - target: {fileID: 5173817961233417626, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817961233417626, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817961285792114, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817961285792114, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817961285792114, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817961285792114, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5173817961953285649, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -386,11 +410,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5173817961953285651, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5173817961953285653, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
       propertyPath: m_Name
       value: TextPopupCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817961953285653, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817962526014400, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817962526014400, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817962526014400, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817962526014400, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817962526014401, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5133474427732830496}
+    - target: {fileID: 5173817962526014401, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnTextPopupClosed
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817962737847167, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817962737847167, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817962737847167, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817962737847167, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173817962737847167, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81f38e0b1a2fd564090026289fb9860e, type: 3}
