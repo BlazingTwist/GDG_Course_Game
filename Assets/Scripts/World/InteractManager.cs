@@ -22,8 +22,8 @@ namespace World {
 		private bool promptEnabled;
 		private bool popUpActive;
 
-		private void Awake() {
-			interactables = Resources.FindObjectsOfTypeAll<Interactable>();
+		private void OnEnable() {
+			interactables = FindObjectsOfType<Interactable>();
 		}
 
 		private void Start() {
