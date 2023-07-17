@@ -20,3 +20,11 @@
 		* Input/Output
 * Nestor Weidemann
 	* Programmierung
+	
+## Spiel
+### Sammelbare Kriegsnotes:
+- Level 1: 2
+- Level 2: 4
+- Level 3: 5
+- Level 4: 2
+- Level 5: 0
