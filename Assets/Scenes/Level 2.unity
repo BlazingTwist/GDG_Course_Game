@@ -37918,7 +37918,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4692086633083620757, guid: e75f94f8ea64bb24e9bf5b180e93c370, type: 3}
       propertyPath: displayText
-      value: Dachtest hier findest du was? - Nichts da!
+      value: 'Dachtest hier findest du was? - Nichts da!
+
+        gez. Wache von
+        Tenebrion'
       objectReference: {fileID: 0}
     - target: {fileID: 4692086633083620759, guid: e75f94f8ea64bb24e9bf5b180e93c370, type: 3}
       propertyPath: m_RootOrder
