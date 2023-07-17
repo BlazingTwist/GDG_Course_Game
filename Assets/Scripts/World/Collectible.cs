@@ -10,6 +10,7 @@
 
 			levelProgressManager.OnCollectibleGotten();
 			gameObject.SetActive(false);
+			
 		}
 	}
 
