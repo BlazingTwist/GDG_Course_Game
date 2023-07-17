@@ -1,6 +1,6 @@
-﻿namespace World {
+namespace World {
 
-	public class Collectible : Interactable {
+	public class RaetselLvl1 : Interactable {
 		public override void OnInteractComplete() {
 			base.OnInteractComplete();
 			
