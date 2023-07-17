@@ -133,7 +133,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
   m_PrefabInstance: {fileID: 257413526}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &14777224
+--- !u!114 &14777227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,13 +142,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 14777217}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16390e7f76456e641b78dcf14ced2638, type: 3}
+  m_Script: {fileID: 11500000, guid: abd9d0ca0a96c744da7d0733fad2195c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyObjects:
-  - {fileID: 14777217}
-  - {fileID: 1894195648}
-  wallObject: {fileID: 1977392210}
+  promptOffset: {x: 0, y: 1, z: 0}
+  titleText: "Mysteri\xF6ser Gegenstand"
+  displayText: Huch, weg ist er.
 --- !u!1001 &219091269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -285,7 +284,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6002319451963109336, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
 --- !u!1 &290208853
 GameObject:
@@ -470,6 +470,7 @@ GameObject:
   - component: {fileID: 415531366}
   - component: {fileID: 415531365}
   - component: {fileID: 415531364}
+  - component: {fileID: 415531369}
   m_Layer: 6
   m_Name: CollisionMap
   m_TagString: Untagged
@@ -16704,6 +16705,24 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &415531369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415531362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87afe484fd962324dae1aa7062236af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originKeyObjects:
+  - {fileID: 667343695}
+  - {fileID: 1428935393}
+  - {fileID: 1894195648}
+  - {fileID: 14777217}
+  removedObject: {fileID: 1977392210}
 --- !u!1001 &432845152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16946,6 +16965,97 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
   m_PrefabInstance: {fileID: 3479609008927959570}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &657285014
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1026819801}
+    m_Modifications:
+    - target: {fileID: 4445273512266547701, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_Name
+      value: keyThree
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002319451963109336, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: titleText
+      value: "Mysteri\xF6ser Gegenstand"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002319451963109336, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: displayText
+      value: Huch weg ist er.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6002319451963109336, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+--- !u!1 &667343695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4445273512266547701, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+  m_PrefabInstance: {fileID: 1967176802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &667343696 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+  m_PrefabInstance: {fileID: 1967176802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &667343700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667343695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd9d0ca0a96c744da7d0733fad2195c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptOffset: {x: 0, y: 1, z: 0}
+  titleText: "Mysteri\xF6ser Gegenstand"
+  displayText: Huch, weg ist er.
 --- !u!4 &834470833 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4692086633083620759, guid: e75f94f8ea64bb24e9bf5b180e93c370, type: 3}
@@ -17382,6 +17492,8 @@ Transform:
   - {fileID: 618331005}
   - {fileID: 14777218}
   - {fileID: 2000994486}
+  - {fileID: 1428935394}
+  - {fileID: 667343696}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17804,6 +17916,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1428935393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4445273512266547701, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+  m_PrefabInstance: {fileID: 657285014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1428935394 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+  m_PrefabInstance: {fileID: 657285014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1428935398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428935393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd9d0ca0a96c744da7d0733fad2195c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptOffset: {x: 0, y: 1, z: 0}
+  titleText: "Mysteri\xF6ser Gegenstand"
+  displayText: Huch, weg ist er.
 --- !u!1 &1471352511
 GameObject:
   m_ObjectHideFlags: 0
@@ -17863,8 +18000,8 @@ PrefabInstance:
     - target: {fileID: 4692086633083620757, guid: e75f94f8ea64bb24e9bf5b180e93c370, type: 3}
       propertyPath: displayText
       value: "Diese Wand scheint merkw\xFCrdig zu sein. Es ist bestimmt eine versteckte
-        T\xFCr. Irgendwo hier im Raum ist der Mechanismus, um diese T\xFCr zu \xF6ffnen,
-        versteckt."
+        T\xFCr. Irgendwo hier im Raum ist der Mechanismusversteckt, der diese T\xFCr
+        \xF6ffnet."
       objectReference: {fileID: 0}
     - target: {fileID: 4692086633083620759, guid: e75f94f8ea64bb24e9bf5b180e93c370, type: 3}
       propertyPath: m_RootOrder
@@ -18630,7 +18767,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6002319451963109336, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
 --- !u!1 &1875250878
 GameObject:
@@ -18841,6 +18979,72 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1967176802
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1026819801}
+    m_Modifications:
+    - target: {fileID: 4445273512266547701, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_Name
+      value: keyFour
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002319451963109336, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: titleText
+      value: "Mysteri\xF6ser Gegenstand"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002319451963109336, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: displayText
+      value: Huch, weg ist er.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -25.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6002319451963109336, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
 --- !u!1 &1977392210 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7882348312970320740, guid: c96ef0b78d017bd458a1109dff015433, type: 3}
@@ -19035,7 +19239,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8791418099608803572, guid: 1dc5a27e5b6ce124fb14e99318bacebc, type: 3}
   m_PrefabInstance: {fileID: 1830145627}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2000994489
+--- !u!114 &2000994492
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19044,13 +19248,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1894195648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16390e7f76456e641b78dcf14ced2638, type: 3}
+  m_Script: {fileID: 11500000, guid: abd9d0ca0a96c744da7d0733fad2195c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyObjects:
-  - {fileID: 14777217}
-  - {fileID: 1894195648}
-  wallObject: {fileID: 1977392210}
+  promptOffset: {x: 0, y: 1, z: 0}
+  titleText: "Mysteri\xF6ser Gegenstand"
+  displayText: Huch, weg ist er.
 --- !u!1 &2079838675
 GameObject:
   m_ObjectHideFlags: 0
