@@ -19,6 +19,8 @@ namespace World
         {
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             int nextSceneIndex = currentSceneIndex + 1;
+
+             Debug.Log("aktuell " + currentSceneIndex + " nächste: " + nextSceneIndex);
             
             if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
             {
@@ -27,6 +29,7 @@ namespace World
             else
             {
                 Debug.Log("No more levels to load. Game complete!");
+                GameManager.GetInstance().GetLevelProgressManager().ShowLevelComplete();
             }
         }
     }
