@@ -20271,11 +20271,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3892372183608337906, guid: c96ef0b78d017bd458a1109dff015433, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7857240342840310813, guid: c96ef0b78d017bd458a1109dff015433, type: 3}
       propertyPath: m_ColliderPaths.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7882348312970320740, guid: c96ef0b78d017bd458a1109dff015433, type: 3}
       propertyPath: m_Name
