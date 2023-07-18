@@ -28,3 +28,11 @@
 - Level 3: 5
 - Level 4: 2
 - Level 5: 0
+
+# Abgabe
+[x] One Pager (Aus der Übung)
+[x] Kurze Anleitung, wie euer Spiel gestartet werden kann
+[x] Readme.txt mit Teamnamen und kurzer Auflisten wer was gemacht hat
+[x] Link zum Download eures Spiels
+[ ] Spiel muss auf einem Windows PC starten
+[ ] Sonst keine Bewertung möglich!
