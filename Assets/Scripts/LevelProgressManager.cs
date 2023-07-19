@@ -47,8 +47,8 @@ public class LevelProgressManager : MonoBehaviour {
 
 	public void ShowLevelComplete() {
 		completionistCheckmark.SetActive(obtainedCollectiblesAll >= totalLevelCollectiblesAll);
-		string totalCollectiblesText = "" + totalLevelCollectibles;
-		completionistDisplayText.text = PadNumber(obtainedCollectibles, totalCollectiblesText.Length) + " / " + totalCollectiblesText;
+		string totalCollectiblesText = "" + obtainedCollectiblesAll;
+		completionistDisplayText.text = PadNumber(obtainedCollectiblesAll, totalCollectiblesText.Length) + " / " + totalCollectiblesText;
 		
 		speedrunnerCheckmark.SetActive(timeSpent <= speedrunThresholdSeconds);
 		speedrunnerDisplayText.text = SecondsToString(timeSpent) + " / " + SecondsToString(speedrunThresholdSeconds);
