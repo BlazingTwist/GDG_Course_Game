@@ -19,7 +19,7 @@ public class LevelProgressManager : MonoBehaviour {
 	private int obtainedCollectibles;
 	private int obtainedCollectiblesAll =0;
 	private bool timerPaused;
-	private float timeSpent;
+	private float timeSpent = 0f;
 
 	private void OnEnable() {
 		levelCompleteCanvas.SetActive(false);
@@ -27,7 +27,7 @@ public class LevelProgressManager : MonoBehaviour {
 		obtainedCollectibles = 0;
 		//obtainedCollectiblesAll += obtainedCollectibles;
 		timerPaused = false;
-		timeSpent = 0f;
+		//timeSpent = 0f;
 
 		totalLevelCollectiblesAll += totalLevelCollectibles;
 	}
