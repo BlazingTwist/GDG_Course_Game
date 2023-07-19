@@ -15,14 +15,18 @@ public class LevelProgressManager : MonoBehaviour {
 	[SerializeField] private float speedrunThresholdSeconds;
 
 	private int totalLevelCollectibles;
+	private int totalLevelCollectiblesAll=0;
 	private int obtainedCollectibles;
+	private int obtainedCollectiblesAll =0;
 	private bool timerPaused;
 	private float timeSpent;
 
 	private void OnEnable() {
 		levelCompleteCanvas.SetActive(false);
 		totalLevelCollectibles = FindObjectsOfType<Collectible>().Length;
+		totalLevelCollectiblesAll += totalLevelCollectibles;
 		obtainedCollectibles = 0;
+		obtainedCollectiblesAll += obtainedCollectibles;
 		timerPaused = false;
 		timeSpent = 0f;
 	}
@@ -42,7 +46,7 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	public void ShowLevelComplete() {
-		completionistCheckmark.SetActive(obtainedCollectibles >= totalLevelCollectibles);
+		completionistCheckmark.SetActive(obtainedCollectiblesAll >= totalLevelCollectiblesAll);
 		string totalCollectiblesText = "" + totalLevelCollectibles;
 		completionistDisplayText.text = PadNumber(obtainedCollectibles, totalCollectiblesText.Length) + " / " + totalCollectiblesText;
 		
