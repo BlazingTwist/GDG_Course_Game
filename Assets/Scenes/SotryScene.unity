@@ -13263,10 +13263,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xDCberquerung des Schattenstromes notwendig, 3 M\xF6glichkeiten: \r\nSchattenfurt
-    \r\nDunkelbr\xFCck \r\nFinsterbach \n\nWenn in Dunkelbr\xFCck: \r\nVereinfachung
-    wenn man den Brief gefunden hat, da so die Eltern des Briefschreibers uns helfen
-    \xFCber die Br\xFCcke zu kommen und die Verfolger verlangsamen\n"
+  m_text: "Umsetzung:\nNach dem Ankommen auf dem Festland, muss unser Held sich durch
+    das Land Tenebron schlagen.\nVerfolger, vor denen man fliehen muss. \r\nVerfolger
+    sind am Tag langsamer und schneller in der Nacht.\n\n\xDCberquerung des Schattenstromes
+    notwendig, 3 M\xF6glichkeiten: \r\nSchattenfurt \r\nDunkelbr\xFCck \r\nFinsterbach
+    \n\nWenn in Dunkelbr\xFCck: \r\nVereinfachung wenn man den Brief gefunden hat,
+    da so die Eltern des Briefschreibers uns helfen \xFCber die Br\xFCcke zu kommen
+    und die Verfolger verlangsamen\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
