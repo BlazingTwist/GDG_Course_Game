@@ -13,6 +13,8 @@
 	* Programmierung
 * André Linke
 	* Programmierung
+		* Items
+	* Story
 * Eric Jarosch
 	* Programmierung
 		* Collectable
@@ -27,7 +29,13 @@
 - Level 2: 4
 - Level 3: 5
 - Level 4: 2
-- Level 5: 0
+- Level 5: 0	//entfernen oder noch 6 und 7 hinzu
+
+### Sammelbare Items:
+- Level 1: Axt
+- Level 2: Karte
+- Level 3: Brief
+- Level 4: Seil
 
 # Abgabe
 [x] One Pager (Aus der Übung)
