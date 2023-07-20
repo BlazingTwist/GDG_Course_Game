@@ -36,6 +36,8 @@
 - Level 2: Karte
 - Level 3: Brief
 - Level 4: Seil
+- Note: Am Ende alle (de)aktivierbar, um die Anzahl der Playthroughs
+	zu reduzieren, um alle Möglichen Kombinationen zu testen
 
 # Abgabe
 [x] One Pager (Aus der Übung)

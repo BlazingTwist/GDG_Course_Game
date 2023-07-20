@@ -1328,14 +1328,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Nachdem ich mich in mein Heimatland durchgeschlagen habewerde ich eine
-    etwas l\xE4ngere Rast halten und danach wieder der Armee beitreten. \r\n \r\n\n\n2
-    Jahre sp\xE4ter: Im Verlaufe des Krieges wurden wir immer wieder \xFCberrascht
-    und hatten eine Niederlage nach der anderen. Tenebrion hat ungef\xE4hr ein Jahr
-    nach meiner Flucht Maschinensoldaten erfunden und diese aufs Schlachtfeld geschickt.
-    Aufgrund dessen konnten wir mit unseren Verlusten nicht mithalten und mussten
-    schlussendlich aufgeben. Sol, gib uns Kraft diese schweren Zeiten der Finsternis
-    zu \xFCberstehen. "
+  m_text: "Nachdem ich mich in mein Heimatland durchgeschlagen habe, muss ich dem
+    K\xF6nig von meinen Erlebnissen berichten. Danach werde ich eine etwas l\xE4ngere
+    Rast halten und danach wieder der Armee beitreten. \r\n \r\n\n\n2 Jahre sp\xE4ter:
+    Im Verlaufe des Krieges wurden wir immer wieder \xFCberrascht und hatten eine
+    Niederlage nach der anderen. Tenebrion hat ungef\xE4hr ein Jahr nach meiner Flucht
+    Maschinensoldaten erfunden und diese aufs Schlachtfeld geschickt. Aufgrund dessen
+    konnten wir mit unseren Verlusten nicht mithalten und mussten schlussendlich
+    aufgeben. Sol, gib uns Kraft diese schweren Zeiten der Finsternis zu \xFCberstehen. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10536,13 +10536,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Nachdem ich mich in mein Heimatland durchgeschlagen habe, werde ich die
-    Karte direkt zu unserem K\xF6nig bringen. Da diese Karte einige wichtige milit\xE4rische
-    Standorte enth\xE4lt, wird es uns in der Zukunft einen Vorteil verschaffen k\xF6nnen.
-    Danach werde ich nach einer etwas l\xE4ngeren Rast wieder der Armee beitreten.
-    \r\n \r\n\n\n2 Jahre sp\xE4ter: Wir konnten dank der Karte vernichtende Schl\xE4ge
-    der tenebrionischen Armee zuf\xFCgen und so schlussendlich den Krieg gewinnen.
-    Wir haben auch ein Labor vernichtet, das an Maschinensoldaten geforscht hat.
-    Sol sei Dank, dass es nun endlich vorbei ist. "
+    Karte direkt zu unserem K\xF6nig bringen und auch meine Erlebnisse schildern.
+    Da diese Karte einige wichtige milit\xE4rische Standorte enth\xE4lt, wird es
+    uns in der Zukunft einen Vorteil verschaffen k\xF6nnen. Danach werde ich nach
+    einer etwas l\xE4ngeren Rast wieder der Armee beitreten. \r\n \r\n\n\n2 Jahre
+    sp\xE4ter: Wir konnten dank der Karte vernichtende Schl\xE4ge der tenebrionischen
+    Armee zuf\xFCgen und so schlussendlich den Krieg gewinnen. Wir haben auch ein
+    Labor vernichtet, das an Maschinensoldaten geforscht hat. Sol sei Dank, dass
+    es nun endlich vorbei ist. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
