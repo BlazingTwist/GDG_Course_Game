@@ -15,16 +15,21 @@ public class LevelProgressManager : MonoBehaviour {
 	[SerializeField] private float speedrunThresholdSeconds;
 
 	private int totalLevelCollectibles;
+	private int totalLevelCollectiblesAll=0;
 	private int obtainedCollectibles;
+	private int obtainedCollectiblesAll =0;
 	private bool timerPaused;
-	private float timeSpent;
+	private float timeSpent = 0f;
 
 	private void OnEnable() {
 		levelCompleteCanvas.SetActive(false);
 		totalLevelCollectibles = FindObjectsOfType<Collectible>().Length;
 		obtainedCollectibles = 0;
+		//obtainedCollectiblesAll += obtainedCollectibles;
 		timerPaused = false;
-		timeSpent = 0f;
+		//timeSpent = 0f;
+
+		totalLevelCollectiblesAll += totalLevelCollectibles;
 	}
 
 	private void FixedUpdate() {
@@ -39,12 +44,13 @@ public class LevelProgressManager : MonoBehaviour {
 
 	public void OnCollectibleGotten() {
 		obtainedCollectibles++;
+		obtainedCollectiblesAll++;
 	}
 
 	public void ShowLevelComplete() {
-		completionistCheckmark.SetActive(obtainedCollectibles >= totalLevelCollectibles);
-		string totalCollectiblesText = "" + totalLevelCollectibles;
-		completionistDisplayText.text = PadNumber(obtainedCollectibles, totalCollectiblesText.Length) + " / " + totalCollectiblesText;
+		completionistCheckmark.SetActive(obtainedCollectiblesAll >= totalLevelCollectiblesAll);
+		string totalCollectiblesText = "" + totalLevelCollectiblesAll;
+		completionistDisplayText.text = PadNumber(obtainedCollectiblesAll, totalCollectiblesText.Length) + " / " + totalCollectiblesText;
 		
 		speedrunnerCheckmark.SetActive(timeSpent <= speedrunThresholdSeconds);
 		speedrunnerDisplayText.text = SecondsToString(timeSpent) + " / " + SecondsToString(speedrunThresholdSeconds);

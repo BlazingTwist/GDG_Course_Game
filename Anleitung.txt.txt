@@ -1,0 +1,19 @@
+# Anleitung 
+## per Executable
+Im "build" Ordner befindet sich die Executable Datei, die zum starten genutzt wird.
+Sie heißt "EscapeFromShadowlands.exe"
+
+## per Unity.
+Den Stammordner in Unity öffnen. Unity sollte die Assets laden.
+Unity Version: 2021.3.25f1 nutzen
+Zum Spielstart in die Szene "Hauptmenue" gehen und auf PLAY drücken.
+
+## im SPiel
+Sollte eigentlich selbsterklärend sein. Auf Spiel starten drücken.
+
+## Hinweis zum Spiel:
+- man kann folgene Anzahl an Notes sammeln
+	- Level 1: 2
+	- Level 2: 4
+	- Level 3: 5
+	- Level 4: 2
