@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 4.unity
     guid: 69b11f84899ac2342ad0b1b2878aa53d
+  - enabled: 1
+    path: Assets/Scenes/SotryScene.unity
+    guid: 5ffdbb50ac8442145a33341b4de058d3
   m_configObjects: {}

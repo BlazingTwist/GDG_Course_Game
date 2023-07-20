@@ -29,19 +29,19 @@ namespace World
         {
             if (name == "Axe")
             {
-                itemManager.CollectAxe();
+                itemManager.CollectAxe(true);
             }
             if (name == "Envelope")
             {
-                itemManager.CollectEnvelope();
+                itemManager.CollectEnvelope(true);
             }
             if (name == "Map")
             {
-                itemManager.CollectMap();
+                itemManager.CollectMap(true);
             }
             if (name == "Rope")
             {
-                itemManager.CollectRope();
+                itemManager.CollectRope(true);
             }
 
         }
