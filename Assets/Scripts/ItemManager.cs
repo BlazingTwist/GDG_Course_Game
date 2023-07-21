@@ -12,7 +12,7 @@ public class ItemManager : MonoBehaviour
     public GameObject map;
     public GameObject rope;
 
-    private bool axeCollected;
+    private bool axeCollected = false;
     private bool envelopeCollected = false;
     private bool mapCollected = false;
     private bool ropeCollected = false;
@@ -37,30 +37,53 @@ public class ItemManager : MonoBehaviour
         rope.SetActive(ropeCollected);
     }
 
-    public void CollectAxe()
+    public void CollectAxe(bool val)
     {
-        axeCollected = true;
+        axeCollected = val;
         UpdateItems();
     }
 
-    public void CollectEnvelope()
+    public void CollectEnvelope(bool val)
     {
-        envelopeCollected = true;
+        envelopeCollected = val;
         UpdateItems();
     }
 
-    public void CollectMap()
+    public void CollectMap(bool val)
     {
-        mapCollected = true;
+        mapCollected = val;
         UpdateItems();
     }
 
-    public void CollectRope()
+    public void CollectRope(bool val)
     {
-        ropeCollected = true;
+        ropeCollected = val;
         UpdateItems();
     }
 
+    public bool GetAxe()
+    {
+        return axeCollected;
+    }
 
+    public bool GetEnvelope()
+    {
+        return envelopeCollected;
+    }
+
+    public bool GetMap()
+    {
+        return mapCollected;
+    }
+
+    public bool GetRope()
+    {
+        return ropeCollected;
+    }
+
+	public void Destroy()
+    {
+        Destroy(this.gameObject);
+    }
 }
 
