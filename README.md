@@ -29,7 +29,7 @@
 - Level 2: 4
 - Level 3: 5
 - Level 4: 2
-- Level 5: 0	//entfernen oder noch 6 und 7 hinzu
+- Level 5-7: 0	
 
 ### Sammelbare Items:
 - Level 1: Axt
