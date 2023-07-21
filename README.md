@@ -49,5 +49,10 @@
 
 # Hinweise zum Ende:
 - aktuell haben wir "die Schiffs"-Option umgesetzt, aber vereinfacht
-	- wir nehmen an gehens auf Schiff (lvl. 5) und "fahren" im Schiff zur anderen Seite (lvl.6)
-	- lvl. 7 soll der Landweg zu Solaria sein
+	- wir nehmen an gehens auf Schiff (Teil vor Teleporter in Lvl. 5)
+	  und "fahren" im Schiff zur anderen Seite Teil nach Teleporter in Lvl. 6)
+	  Notiz: das Schiffs-Level wurde nicht ausreichend getestet, ob man aus allen Bereichen wieder rauskommt,
+		 es wird also empfohlen, nicht zu viel zu riskieren
+	- Lvl. 6 ist der Landweg vor dem Fluss
+	- Lvl. 7 ist der Landweg nach dem Fluss mit der Grenze(Frontlinie-Lvl in der Story)
+	- die "Story-Level" nach dem Lvl. 7 sind die verschiedenen Möglichkeiten
