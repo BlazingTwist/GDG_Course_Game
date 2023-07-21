@@ -29,7 +29,7 @@
 - Level 2: 4
 - Level 3: 5
 - Level 4: 2
-- Level 5-7: 0	
+- Level 5-7: 0
 
 ### Sammelbare Items:
 - Level 1: Axt
@@ -46,3 +46,8 @@
 [x] Link zum Download eures Spiels
 [ ] Spiel muss auf einem Windows PC starten
 [ ] Sonst keine Bewertung möglich!
+
+# Hinweise zum Ende:
+- aktuell haben wir "die Schiffs"-Option umgesetzt, aber vereinfacht
+	- wir nehmen an gehens auf Schiff (lvl. 5) und "fahren" im Schiff zur anderen Seite (lvl.6)
+	- lvl. 7 soll der Landweg zu Solaria sein

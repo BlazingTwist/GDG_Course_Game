@@ -731,7 +731,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Du schleichst dich auf Schiff. Dort musst du w\xE4hrend der Schiffsreise
     unentdeck bleiben.\n\n\nUmsetzung:\nIm Schiff laufen NPC's herum, denen man ausweichen
-    muss.\n\n(aktuell umgesetzt, aber vereinfacht)"
+    muss.\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
